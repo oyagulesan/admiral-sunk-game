@@ -184,7 +184,7 @@ const Game = () => {
           top: ((SIZE * 2) + 'px'),
           left: ((SIZE * 2) + 'px')}}
         >
-          <img src={congratsGif} alt="wait until the page loads" />
+          <img src={congratsGif} alt="CONGRATS" />
         </div>
       }
     </div>
