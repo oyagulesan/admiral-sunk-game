@@ -1,62 +1,55 @@
 import createDataContext from './createDataContext';
+import { COMPONENTS } from '../util/constants';
 
 const appReducer = (state, action) => {
     switch (action.type) {
-        case 'throwError':
-        case 'setInfo':
-            return { ...state, info: {
-                message: action.payload.message,
-            }}
-        case 'setNumber':
+        case 'setHits':
             return {...state,
-                numberToBeGuessed: action.payload}
-        case 'setGameOn':
-            return {...state,
-                gameOn: action.payload}
-        case 'setGuesses':
-            return {...state,
-                guesses: action.payload}
-        case 'setIterations':
-            return {...state,
-                iterations: action.payload}
+                hits: action.payload}
         case 'setBoard':
             return {...state, board: action.payload}
+        case 'setHitBoard':
+            return {...state, hitBoard: action.payload}
+        case 'setShips':
+            return {...state, ships: action.payload} 
+        case 'setFinished':
+            return {...state, finished: action.payload} 
         default:
             return state;
     }
 };
 
-const throwError = dispatch => (message) => {
-    dispatch({type: 'throwError', payload: {message}});
-};
-
-const setInfo = dispatch => (message) => {
-    dispatch({type: 'setInfo', payload: {message}});
-};
-
-const setNumber = dispatch => (val) => {
-    dispatch({type: 'setNumber', payload: {val}});
-};
-
-const setGameOn = dispatch => (val) => {
-    dispatch({type: 'setGameOn', payload: {val}});
-};
-
-const setGuesses = dispatch => (val) => {
-    dispatch({type: 'setGuesses', payload: {val}});
-};
-
-const setIterations = dispatch => (val) => {
-    dispatch({type: 'setIterations', payload: {val}});
+const setHits = dispatch => (val) => {
+    dispatch({type: 'setHits', payload: val});
 };
 
 const setBoard = dispatch => (val) => {
     dispatch({type: 'setBoard', payload: val})
 }
+const setHitBoard = dispatch => (val) => {
+    dispatch({type: 'setHitBoard', payload: val})
+}
+const setShips = dispatch => (val) => {
+    dispatch({type: 'setShips', payload: val})
+}
+const setFinished = dispatch => (val) => {
+    dispatch({type: 'setFinished', payload: val})
+}
+
 export const { Context, Provider } = createDataContext(
     appReducer,
-    { setBoard, throwError, setInfo, setNumber, setGameOn, setGuesses, setIterations },
+    { setBoard, setHits, setShips, setHitBoard, setFinished },
     {    
-        board: []
+        board: [],
+        hits: [],
+        hitBoard: Array.from({ length: 10 }, () => {
+            return Array.from({ length: 10 }, () => {
+              return {type: 0, hitNumber: 0};
+            });
+        }),
+        ships: COMPONENTS.map(comp => Array.from({ length: comp }, () => {
+            return 0;
+        })),
+        finished: false
      }
 );

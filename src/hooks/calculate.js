@@ -1,9 +1,4 @@
-const COMPONENTS = [4,3,3,2,2,2,1,1,1,1]
-const EMPTY_BOARD = Array.from({ length: 10 }, () => {
-    return Array.from({ length: 10 }, () => {
-      return 0;
-    });
-});
+import { COMPONENTS, EMPTY_BOARD } from '../util/constants'
 
 const checkNeighbors = (board, x, y) => {
     // Check up
