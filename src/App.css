@@ -28,6 +28,27 @@
   color: #61dafb;
 }
 
+.ship {
+  background-color: rgb(120, 64, 16);
+}
+
+.shipBorder {
+  background-color: rgb(100, 200, 200);
+}
+
+.sea {
+  background-color: rgb(90, 190, 235);
+}
+
+.canvas {
+  background-color: rgb(150, 220, 255);
+  border: 4px;
+  border-color: rgb(80, 180, 230);
+  border-style: solid;
+  border-radius: 20px;
+  padding: 20px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
