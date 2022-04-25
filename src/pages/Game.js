@@ -12,23 +12,31 @@ const jList = [0,1,2,3,4,5,6,7,8,9];
 
 const canvasStyle = {
   position: 'absolute',
-  height: (SIZE * 14)+ 'px',
+  height: (SIZE * 16)+ 'px',
   width: (SIZE * 16)+ 'px',
-  top: (SIZE * 2) + 'px',
+  top: (SIZE * 1) + 'px',
   left: (SIZE * 1) + 'px',
 }
 const hitButtonStyle = {
   position: 'absolute',
-  top: (SIZE * 13) + 'px',
+  top: (SIZE * 15) + 'px',
   left: (SIZE * 6) + 'px',
+}
+
+const hitDescStyle = {
+  position: 'absolute',
+  top: (SIZE * 15) + 'px',
+  left: (SIZE * 2) + 'px',
 }
 
 const dragStyle = {
   position: 'absolute',
-  height: (SIZE * 4)+ 'px',
-  width: (SIZE * 2)+ 'px',
-  top: (SIZE * 2) + 'px',
-  left: (SIZE * 13) + 'px',
+  height: (SIZE * 6)+ 'px',
+  width: (SIZE * 5)+ 'px',
+  top: (SIZE * 4) + 'px',
+  left: (SIZE * 12) + 'px',
+  display: 'flex',
+  flexDirection: 'column',
 }
 
 const draggableCellStyle = {
@@ -37,15 +45,18 @@ const draggableCellStyle = {
   border: 'solid',
   height: SIZE + 2 + 'px',
   width: SIZE + 2 + 'px',
-  marginBottom: '10px'
+  marginBottom: '10px',
+  borderRadius: '10px'
 }
 
 const shipsStyle = {
   position: 'absolute',
   height: (SIZE * 6)+ 'px',
   width: (SIZE * 5)+ 'px',
-  top: (SIZE * 8) + 'px',
+  top: (SIZE * 10) + 'px',
   left: (SIZE * 12) + 'px',
+  display: 'flex',
+  flexDirection: 'column',
 }
 
 const Game = () => {
@@ -167,14 +178,18 @@ const Game = () => {
  */
   return (
     <div className='canvas' style={canvasStyle}>
+      <header className="App-header">ADMIRAL SUNK GAME</header>
       {iList.map(i => jList.map(j => <Cell onCellClick={onCellClick} key={i + '-' + j} i={i} j={j} type={hitBoard.length === 10 ? hitBoard[i][j].type : null} hitNumber={hitBoard[i][j].hitNumber || (hitSet.find(item => item[0] === i && item[1] === j) ? hits.length + 1 : null)}/>))}
-      <button className='hitButton' style={hitButtonStyle} onClick={onClick} disabled={hitSet.length !== 3 && !finished}>{finished ? 'RESTART' : 'HIT!'}</button>
+      {hitSet.length !== 3 && !finished ? <span style={hitDescStyle}>Click on cells to hit. 3 hits each time.</span>
+      : <button className='hitButton' style={hitButtonStyle} onClick={onClick} disabled={hitSet.length !== 3 && !finished}>{finished ? 'RESTART' : 'HIT!'}</button> }
       <div style={dragStyle}>
+        <span className='desc'>Drag drop to mark cells</span>
         <div style={draggableCellStyle} draggable ref={dragRefShip} className='ship' />
         <div style={draggableCellStyle} draggable ref={dragRefSea} className='sea' />
         <div style={draggableCellStyle} draggable ref={dragRefBorder} className='shipBorder' />
       </div>
       <div style={shipsStyle}>
+        <span className='desc'>Hit history</span>
         <Ships />
       </div>
       {finished &&

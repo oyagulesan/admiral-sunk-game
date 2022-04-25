@@ -23,7 +23,7 @@ const Cell = (props) => {
 
   const cellStyle = {
       position: 'absolute',
-      top: ((SIZE + 2) * (j + 1.25))+ 'px',
+      top: ((SIZE + 2) * (j + 3))+ 'px',
       left: ((SIZE + 2) * (i + 0.5))+ 'px',
       color: 'white',
       borderColor: 'black',
